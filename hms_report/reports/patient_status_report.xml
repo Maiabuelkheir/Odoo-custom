@@ -1,0 +1,57 @@
+<odoo>
+    <data>
+        <template id="patient_status_report_template"
+                  name="Patient Status Report Template"
+                  key="hms_report.patient_status_report">
+            <t t-name="hms_report.patient_status_report">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <h2>Patient Status Report</h2>
+                        <p><strong>Name:</strong> <span t-esc="doc.first_name"/> <span t-esc="doc.last_name"/></p>
+                        <p><strong>Age:</strong> <span t-esc="doc.age"/></p>
+                        <p><strong>Department:</strong> <span t-esc="doc.department_id.name"/></p>
+                        <p><strong>Doctors:</strong>
+                            <t t-foreach="doc.doctor_ids" t-as="doctor">
+                                <span t-esc="doctor.name"/><t t-if="not loop.last">, </t>
+                            </t>
+                        </p>
+                        <p><strong>Birth Date:</strong> <span t-esc="doc.birth_date"/></p>
+                        <p><strong>PCR:</strong> <span t-esc="doc.pcr and 'Yes' or 'No'"/></p>
+                        <p><strong>Blood Type:</strong> <span t-esc="doc.blood_type"/></p>
+                        <p><strong>Email:</strong> <span t-esc="doc.email"/></p>
+                        <p><strong>Condition:</strong> <span t-esc="doc.state"/></p>
+                        <t t-if="doc.history">
+                            <p><strong>History:</strong> <span t-raw="doc.history"/></p>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+     
+        <record id="action_patient_status_report" model="ir.actions.report">
+            <field name="name">Patient Status Report</field>
+            <field name="model">hms.patient</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">hms_report.patient_status_report</field>
+            <field name="binding_model_id" ref="hms.model_hms_patient"/>
+            <field name="binding_type">report</field>
+            <field name="binding_view_types">list,form</field>
+        </record>
+
+        <menuitem id="hms_report_menu"
+                  name="Reports"
+                  sequence="10"/>
+
+        
+        <menuitem id="patient_status_report_menu"
+                  name="Patient Status Report"
+                  parent="hms_report_menu"
+                  action="action_patient_status_report"
+                  sequence="20"/>
+
+        <menuitem id="test_menu" name="Test Menu" sequence="100"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,68 @@
+<odoo>
+    <data>
+
+    <record id="department_data_form_view" model="ir.ui.view"> 
+       <field name="name">department Data</field>
+       <field name="model">hms.department</field>
+       <field name="arch" type="xml">
+       <form>
+       <sheet>
+        <group string="Department Information">
+              <field name="name"/>
+              <field name="capacity"/>
+              <field name="is_opened" />
+
+        </group>
+        <group>
+            <field name="patient_ids"/>
+        </group>
+        </sheet>
+       </form>
+       </field>
+    </record>
+
+
+
+
+   <record id="department_data_list_view" model="ir.ui.view"> 
+       <field name="name">Department Data</field>
+       <field name="model">hms.department</field>
+       <field name="arch" type="xml">
+       <list>
+              <field name="name"/>
+              <field name="capacity"/>
+              <field name="is_opened" />
+       </list>
+       </field>
+    </record>
+
+
+      <record id="department_data_actions" model="ir.actions.act_window">
+        <field name="name">Department Data</field>
+        <field name="res_model">hms.department</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="department_data_list_view"/>
+     </record>
+
+
+
+
+
+    <record id="department_data_form_action" model="ir.actions.act_window">
+      <field name="name">Department Form</field>
+      <field name="res_model">hms.department</field>
+      <field name="view_mode">form,list</field>
+      <field name="view_id" ref="department_data_form_view"/>
+    </record>
+
+
+
+
+
+  
+  <menuitem id="menu_department_data" name="department Data"/>
+  <menuitem id="menu_patient_data_list" name=" Department Data List" parent="menu_department_data" action="department_data_actions"/>
+  <menuitem id="menu_department_data_form" name="Department Data Form" parent="menu_department_data" action="department_data_form_action"/>
+
+    </data>
+</odoo>

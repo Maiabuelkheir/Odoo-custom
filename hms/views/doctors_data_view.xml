@@ -1,0 +1,61 @@
+<odoo>
+    <data>
+
+    <record id="doctor_data_form_view" model="ir.ui.view"> 
+       <field name="name">Docror Data</field>
+       <field name="model">hms.doctor</field>
+       <field name="arch" type="xml">
+       <form>
+       <sheet>
+        <group string="Doctor Information">
+              <field name="first_name"/>
+              <field name="last_name"/>
+              <field name="image" widget="image" />
+        </group>
+        </sheet>
+       </form>
+       </field>
+    </record>
+
+    <record id="doctor_data_list_view" model="ir.ui.view"> 
+       <field name="name">Doctor Data</field>
+       <field name="model">hms.doctor</field>
+       <field name="arch" type="xml">
+       <list>
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="image" widget="image" />
+       </list>
+       </field>
+    </record>
+
+
+
+
+
+
+   <record id="doctor_data_actions" model="ir.actions.act_window">
+        <field name="name">Doctor Data</field>
+        <field name="res_model">hms.doctor</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="doctor_data_list_view"/>
+     </record>
+
+
+
+    <record id="doctor_data_form_action" model="ir.actions.act_window">
+      <field name="name">Doctor Form</field>
+      <field name="res_model">hms.doctor</field>
+      <field name="view_mode">form,list</field>
+      <field name="view_id" ref="doctor_data_form_view"/>
+    </record>
+
+
+
+  
+  <menuitem id="menu_doctor_data" name="doctor Data"/>
+  <menuitem id="menu_doctor_data_list" name="Doctor Data List" parent="menu_doctor_data" action="doctor_data_actions"/>
+  <menuitem id="menu_doctor_data_form" name="Doctor Data Form" parent="menu_doctor_data" action="doctor_data_form_action"/>
+
+    </data>
+</odoo>
